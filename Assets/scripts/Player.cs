@@ -28,7 +28,7 @@ public class Player : MonoBehaviour {
         //rig.MovePosition(new Vector2(hor, this.transform.position.y));
         //rig.MovePosition(new Vector2(hor, ver));
 
-        rig.velocity = nw * speed;
+        //rig.velocity = nw * speed;
 
         //rig.AddForce(movement);
         //rig.MovePosition(this.transform.position + move);
