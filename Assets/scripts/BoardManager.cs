@@ -22,6 +22,7 @@ public class BoardManager : MonoBehaviour
         }
     }
 
+
     public class CameraViewPort
     {
         public int minX { get; set; }
@@ -38,7 +39,6 @@ public class BoardManager : MonoBehaviour
 
     private Transform boardHolder;   //A variable to store a reference to the transform of our Board object.
     private List<Vector3> gridPositions = new List<Vector3>();   //A list of possible locations to place tiles.
-    public GameObject FloorCollider;
 
 
     //Clears our list gridPositions and prepares it to generate a new board.
@@ -98,10 +98,6 @@ public class BoardManager : MonoBehaviour
             CreateTile(columns, y, boardHolder, 1, lowerFloor);
         }
 
-        BoxCollider2D collider2D = FloorCollider.AddComponent<BoxCollider2D>();
-
-        collider2D.transform.position = new Vector2(0, 0);
-        collider2D.size = new Vector2(0.32f * columns, 0.32f * 2);
             
     }
 
