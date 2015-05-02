@@ -74,9 +74,9 @@ public class BoardManager : MonoBehaviour
                 var width = toInstantiate.GetComponent<Renderer>().bounds.size.x;
                 var height = toInstantiate.GetComponent<Renderer>().bounds.size.y;
 
-                
-                
-                var camera = CameraFit.Instance.GetComponent<Camera>().ViewportToWorldPoint(new Vector3(0, 0,0));
+
+
+                var camera = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
 
                 var pos = camera + new Vector3(x * width, y * height);
 
@@ -85,8 +85,6 @@ public class BoardManager : MonoBehaviour
                 instance.transform.SetParent(boardHolder);
             }
         }
-
-        boardHolder.transform.position = CameraFit.Instance.BottomRight;
     }
 
     //RandomPosition returns a random position from our list gridPositions.
