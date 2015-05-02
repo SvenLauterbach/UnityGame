@@ -12,7 +12,8 @@ public class Player : MonoBehaviour {
 	void Start ()
     {
 	    rig = GetComponent<Rigidbody2D>();
-	}
+	    transform.position = BoardManager.Instance.StartPosition;
+    }
 	
 	// Update is called once per frame
 	void Update () 
@@ -28,7 +29,7 @@ public class Player : MonoBehaviour {
         //rig.MovePosition(new Vector2(hor, this.transform.position.y));
         //rig.MovePosition(new Vector2(hor, ver));
 
-        //rig.velocity = nw * speed;
+        rig.velocity = nw * speed;
 
         //rig.AddForce(movement);
         //rig.MovePosition(this.transform.position + move);

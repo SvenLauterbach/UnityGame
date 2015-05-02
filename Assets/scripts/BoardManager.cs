@@ -6,13 +6,25 @@ using Random = UnityEngine.Random;
 
 public class BoardManager : MonoBehaviour
 {
-    // Using Serializable allows us to embed a class with sub properties in the inspector.
     public int columns;                                         //Number of columns in our game board.
     public int rows;                                     //Prefab to spawn for exit.
     public GameObject[] floorTiles;                                 //Array of floor prefabs.
     public GameObject[] lowerFloor;
 
+    public static BoardManager Instance { get; private set; }
+
     private Transform boardHolder;   //A variable to store a reference to the transform of our Board object.
+    private Vector3 lowerLeftCorner = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }   
+    }
+
+    public Vector2 StartPosition { get; private set; }
 
     //Sets up the outer walls and floor (background) of the game board.
     void BoardSetup()
@@ -47,6 +59,8 @@ public class BoardManager : MonoBehaviour
             CreateTile(x, rows, boardHolder, 1, lowerFloor);
         }
 
+        StartPosition = lowerLeftCorner + new Vector3(1*1f, (2*0.32f) + 1f);
+
         for (int y = 1; y <= rows; y++)
         {
             CreateTile(columns, y, boardHolder, 1, lowerFloor);
@@ -61,11 +75,7 @@ public class BoardManager : MonoBehaviour
         var width = toInstantiate.GetComponent<Renderer>().bounds.size.x;
         var height = toInstantiate.GetComponent<Renderer>().bounds.size.y;
 
-
-
-        var camera = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
-
-        var pos = camera + new Vector3(x * width, y * height);
+        var pos = lowerLeftCorner + new Vector3(x * width, y * height);
 
         GameObject instance = Instantiate(toInstantiate, pos, Quaternion.identity) as GameObject;
 
@@ -77,8 +87,5 @@ public class BoardManager : MonoBehaviour
     {
         //Creates the outer walls and floor.
         BoardSetup();
-
-        //Reset our list of gridpositions.
-        //InitialiseList();
     }
 }

@@ -198,3 +198,11 @@ FakesAssemblies/
 # Visual Studio 6 workspace options file
 *.opt
 
+# =============== #
+# Unity generated #
+# =============== #
+[Tt]emp/
+[Oo]bj/
+[Bb]uild
+[Ll]ibrary/
+
