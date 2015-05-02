@@ -74,8 +74,8 @@ public class CameraFit : MonoBehaviour
 #endif
 
 
-        camera.aspect = deviceWidth/deviceHeight;
-        camera.orthographicSize = deviceWidth / (((deviceWidth / deviceHeight) * 2f) * spriteSize);
+
+        camera.orthographicSize = deviceWidth / (((deviceWidth / deviceHeight) * 2) * spriteSize);
         Instance = this;
     }
 

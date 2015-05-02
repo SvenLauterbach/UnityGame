@@ -12,10 +12,6 @@ public class Player : MonoBehaviour {
 	void Start ()
     {
 	    rig = GetComponent<Rigidbody2D>();
-
-        var camera = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
-
-
 	}
 	
 	// Update is called once per frame
@@ -26,7 +22,7 @@ public class Player : MonoBehaviour {
 
         //Vector2 movement = new Vector2(speed, 0);
         //Vector3 move = new Vector3(speed, 0, 0);
-        Vector2 nw = new Vector2(1,ver);
+        Vector2 nw = new Vector2(1,ver*2);
         
 
         //rig.MovePosition(new Vector2(hor, this.transform.position.y));
