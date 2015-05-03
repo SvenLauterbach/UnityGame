@@ -9,7 +9,7 @@ public class FinishTrigger : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Test");
-        GameManager.instance.ShowFinishMenu();
+        MenuManager.Instance.ShowFinishMenu();
         Player.Stop();
     }
 }

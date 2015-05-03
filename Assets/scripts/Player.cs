@@ -8,11 +8,11 @@ public class Player : MonoBehaviour {
 
     private Rigidbody2D rig;
     private Vector3 oldposition;
+    private bool isStopped;
 
 	void Start ()
     {
 	    rig = GetComponent<Rigidbody2D>();
-	    //transform.position = BoardManager.Instance.StartPosition;
     }
 	
 	// Update is called once per frame
@@ -22,11 +22,16 @@ public class Player : MonoBehaviour {
 
         Vector2 nw = new Vector2(1,ver*2);
 
-        rig.velocity = nw * speed;
-	}
+	    if (!isStopped)
+	    {
+	        rig.velocity = nw*speed;
+	    }
+    }
 
     public void Stop()
     {
         rig.velocity = new Vector2(0f, 0f);
+        GetComponent<Animation>().
+        isStopped = true;
     }
 }

@@ -60,16 +60,16 @@ public class GameManager : MonoBehaviour {
 
     public void ShowFinishMenu()
     {
-        var canvasGroup = Menu.GetComponent<CanvasGroup>();
-        var panel = Menu.GetComponent<RectTransform>();
-        var text = panel.GetComponentInChildren<Text>();
+        //var canvasGroup = Menu.GetComponent<CanvasGroup>();
+        //var panel = Menu.GetComponent<RectTransform>();
+        //var text = panel.GetComponentInChildren<Text>();
 
-        text.text = "Yay, Finish!";
+        //text.text = "Yay, Finish!";
         
-        CreateMainMenuButton(panel);
-        CreateNextLevelButton(panel);
+        //CreateMainMenuButton(panel);
+        //CreateNextLevelButton(panel);
 
-        canvasGroup.alpha = 1;
+        //canvasGroup.alpha = 1;
     }
 
     public void HideMenu()
@@ -90,11 +90,13 @@ public class GameManager : MonoBehaviour {
 
     private void CreateNextLevelButton(RectTransform menu)
     {
-        var nextLevelButton = menu.gameObject.AddComponent<Button>();
+        GameObject buttonObject = new GameObject();
+        var nextLevelButton = buttonObject.AddComponent<Button>();
 
         nextLevelButton.GetComponentInChildren<Text>().text = "Next Level";
         nextLevelButton.onClick.AddListener(StartNextLevel);
         nextLevelButton.transform.position = new Vector3(0f, -55f, 0f); 
+
     }
 
     private void StartNextLevel()
