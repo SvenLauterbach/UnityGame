@@ -62,6 +62,7 @@
     <Compile Include="Assets\CameraController.cs" />
     <Compile Include="Assets\scripts\BoardManager.cs" />
     <Compile Include="Assets\scripts\CameraFit.cs" />
+    <Compile Include="Assets\scripts\FinishTrigger.cs" />
     <Compile Include="Assets\scripts\GameManager.cs" />
     <Compile Include="Assets\scripts\MenuController.cs" />
     <Compile Include="Assets\scripts\Player.cs" />

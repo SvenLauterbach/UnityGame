@@ -1,32 +1,36 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
     public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
-    private BoardManager boardScript;                       //Store a reference to our BoardManager which will set up the level.
-    private int level = 3;                                  //Current level number, expressed in game as "Day 1".
+    public Canvas Menu;
+
+    public int Level { get; private set; }
+
 
     //Awake is always called before any Start functions
     void Awake()
     {
         //Check if instance already exists
         if (instance == null)
-
+        {
             //if not, set instance to this
             instance = this;
-
+        }
         //If instance already exists and it's not this:
         else if (instance != this)
-
+        {
             //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
             Destroy(gameObject);
+        }
 
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
 
         //Get a component reference to the attached BoardManager script
-        boardScript = GetComponent<BoardManager>();
 
         //Call the InitGame function to initialize the first level 
         InitGame();
@@ -35,16 +39,72 @@ public class GameManager : MonoBehaviour {
     //Initializes the game for each level.
     void InitGame()
     {
-        //Call the SetupScene function of the BoardManager script, pass it current level number.
-        boardScript.SetupScene(level);
 
     }
-
-
-
+    
     //Update is called every frame.
     void Update()
     {
 
+    }
+
+    public void ShowMenu()
+    {
+        var canvasGroup = Menu.GetComponent<CanvasGroup>();
+        var panel = Menu.GetComponent<RectTransform>();
+
+        CreateNextLevelButton(panel);
+
+        canvasGroup.alpha = 1;   
+    }
+
+    public void ShowFinishMenu()
+    {
+        var canvasGroup = Menu.GetComponent<CanvasGroup>();
+        var panel = Menu.GetComponent<RectTransform>();
+        var text = panel.GetComponentInChildren<Text>();
+
+        text.text = "Yay, Finish!";
+        
+        CreateMainMenuButton(panel);
+        CreateNextLevelButton(panel);
+
+        canvasGroup.alpha = 1;
+    }
+
+    public void HideMenu()
+    {
+        var canvasGroup = Menu.GetComponent<CanvasGroup>();
+
+        canvasGroup.alpha = 0;
+    }
+
+    private void CreateMainMenuButton(RectTransform menu)
+    {
+        var mainMenuButton = menu.gameObject.AddComponent<Button>();
+        
+        mainMenuButton.GetComponentInChildren<Text>().text = "Main Menu";
+        mainMenuButton.onClick.AddListener(ShowMainMenu);
+        mainMenuButton.transform.position = new Vector3(0f, 0f, 0f);  
+    }
+
+    private void CreateNextLevelButton(RectTransform menu)
+    {
+        var nextLevelButton = menu.gameObject.AddComponent<Button>();
+
+        nextLevelButton.GetComponentInChildren<Text>().text = "Next Level";
+        nextLevelButton.onClick.AddListener(StartNextLevel);
+        nextLevelButton.transform.position = new Vector3(0f, -55f, 0f); 
+    }
+
+    private void StartNextLevel()
+    {
+        Level++;
+        Application.LoadLevel("level");
+    }
+
+    public void ShowMainMenu()
+    {
+        Application.LoadLevel("menu");
     }
 }
